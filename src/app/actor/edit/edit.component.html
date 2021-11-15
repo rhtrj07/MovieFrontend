@@ -1,0 +1,53 @@
+<div class="container-fluid" style="margin-left: 400px; margin-top: 50px;">
+    <form [formGroup]="actorForm" (ngSubmit)="onSubmit()">
+         
+          <h2  >Edit Profile</h2>
+          <div class="form-group-1" style="max-width: 700px;">
+
+            <input
+              type="text"
+              id="aname"
+              [value]="actor.aname"
+              formControlName="aname"
+              placeholder="Name"
+              class="form-control"/>
+
+            <input
+              type="text"
+              id="age"
+              formControlName="age"
+              placeholder="Age"
+              class="form-control"/>
+            <input
+                type="text"
+                id="gender"
+                formControlName="gender"
+                placeholder="Gender"
+                class="form-control"/>
+              <input
+                type="number"
+                id="experience"
+                formControlName="experience"
+                placeholder="Experience"
+                class="form-control"/>
+              <input
+                type="number"
+                id="phone"
+                formControlName="phone"
+                placeholder="Phone no"
+                class="form-control"/>
+              
+
+              <input type="file" class="form-control browse" ngModel (change)="getFiles($event)"/>
+
+          </div>
+          <div class="form-submit" style="margin-top: 50px;">
+            <button
+            type="submit"
+            class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+          </div>
+      </form>
+
+      </div>
+      

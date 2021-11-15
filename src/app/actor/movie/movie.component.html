@@ -1,0 +1,38 @@
+
+  
+  <div class="row">
+    <div class="col-xs-12">  
+     <div *ngFor="let movie of movies;">
+  
+        <div class="card" style="background-image: url('{{movie.photo}}')" >
+          
+          <!-- <img [src]="movie.photo" class="img-responsive">  -->
+          
+          <div class="card__inner">
+  
+            
+            <main class="card__body">
+              
+              <div class="card__info">
+                <h1 class="card__title">{{movie.mname}}</h1>
+            
+                <p class="card__slug">{{movie.description}}</p>
+
+                <div class="card__rating">
+                  {{movie.rating}}
+                </div>
+              </div>
+            </main>
+            
+            <footer class="card__footer">
+              <ul class="list list--info">
+                <li>{{movie.releasedate | date:'dd-MMM-yyyy'}}</li>
+                <li>{{movie.duration}} min</li>
+                <li>{{movie.genre}}</li>
+              </ul>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

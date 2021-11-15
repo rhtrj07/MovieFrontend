@@ -1,0 +1,104 @@
+
+
+    <div class="main">
+
+        <div class="container">
+          <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+                <h2 *ngIf ="editMode===false" >Add New Movie</h2>
+                <h2 *ngIf = "this.editMode" >Edit Movie</h2>
+                <div class="form-group-1">
+                  <input
+                      type="text"
+                      id="mname"
+                      formControlName="mname"
+                      placeholder="mname"
+                      value="movie.mname"
+                      class="form-control" hidden/>
+                  <input
+                      type="text"
+                      id="mname"
+                      formControlName="mname"
+                      placeholder="mname"
+                      class="form-control" hidden/>
+                  <input
+                    type="text"
+                    id="mname"
+                    [value]="movie.mname"
+                    formControlName="mname"
+                    placeholder="Name"
+                    class="form-control"/>
+                  <textarea rows="4" cols="50"
+                    type="text"
+                    id="description"
+                    formControlName="description"
+                    placeholder="Description"
+                    class="form-control"></textarea>
+                  <input
+                      type="text"
+                      id="genre"
+                      formControlName="genre"
+                      placeholder="Genre"
+                      class="form-control"/>
+                    <input
+                      type="number"
+                      id="duration"
+                      formControlName="duration"
+                      placeholder="Duration"
+                      class="form-control"/>
+                    <input
+                      type="number"
+                      id="rating"
+                      formControlName="rating"
+                      placeholder="Rating"
+                      class="form-control"/>
+                    <input
+                      type="date"
+                      id="releasedate"
+                      formControlName="releasedate"
+                      placeholder="Release Date"
+                      class="form-control"/>
+                    <input type="file" class="form-control browse" ngModel (change)="getFiles($event)"/>
+
+                </div>
+               
+
+                <div class="row">
+                  <div class="col-xs-12" formArrayName="MovieActorLinks">
+                    <div
+                      class="row"
+                      *ngFor="let castCtrl of movieForm.get('MovieActorLinks')['controls']; let i = index"
+                      [formGroupName]="i"
+                      style="margin-top: 10px;">
+                
+                          <select formControlName="Actorid" (change)="update($event)" style="display: inline-flexbox; max-width: 500px;">
+                            <option *ngFor="let actor of actors" [ngValue]='actor.id' >
+                                {{actor.aname}}
+                            </option>
+                          </select>
+                      
+                        <button style="display: inline-flexbox; width: 50px; height: 40px; margin-left: 50px;"
+                          type="button"
+                          class="btn btn-danger"
+                          (click)="onDeleteCast(i)">X</button>
+                     
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <button
+                          type="button"
+                          class="btn btn-success"
+                          (click)="onAddCast()">Add Cast</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-submit" style="margin-top: 50px;">
+                  <button
+                  type="submit"
+                  class="btn btn-success">Save</button>
+                  <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>

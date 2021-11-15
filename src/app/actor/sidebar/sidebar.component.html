@@ -1,0 +1,47 @@
+<body class="show-sidebar">
+  
+    
+    <aside class="sidebar" >
+      <div class="toggle">
+        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+              <span></span>
+            </a>
+      </div>
+      <div class="side-inner">
+
+        <div class="profile" style="margin-top:100px ;">
+          <img [src]="actor.photo" alt="Image" class="img-fluid">
+          <h3 class="name">{{actor.aname}}</h3>
+          <span class="country">{{actor.email}}</span>
+        </div>
+
+        <!-- <div class="counter d-flex justify-content-center">
+         
+            <div class="col">
+              <strong class="number">892</strong>
+              <span class="number-label">Posts</span>
+            </div>
+            <div class="col">
+              <strong class="number">22.5k</strong>
+              <span class="number-label">Followers</span>
+            </div>
+            <div class="col">
+              <strong class="number">150</strong>
+              <span class="number-label">Following</span>
+            </div>
+          
+        </div> -->
+        
+        <div class="nav-menu" style="margin-top: 50px;">
+          <ul>
+            <li><a style="cursor: pointer;" class="nav-link " (click)="onProfile()">Profile</a></li>
+            <li><a style="cursor: pointer;" class="nav-link " (click)="onEdit()">Edit</a></li>
+            <li><a style="cursor: pointer;" class="nav-link " (click)="onMovies()">Movies</a></li>
+
+
+          </ul>
+        </div>
+      </div>
+      
+    </aside>
+  </body>
