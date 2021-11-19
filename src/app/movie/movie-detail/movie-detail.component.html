@@ -88,8 +88,8 @@
                         </ul>
                         <div id="outer">
                           <div class="inner button" (click)="showMyContainer=!showMyContainer" >Show Cast</div>
-                          <a style="cursor: pointer;" (click)="onEditMovie()"><div class="inner button">Edit</div></a>
-                          <a style="cursor: pointer;" (click)="onDeleteMovie()"><div class="inner button"> Delete</div></a>
+                          <a  *ngIf="((isRoleIn$ | async) == 'Admin')"  style="cursor: pointer;" (click)="onEditMovie()"><div class="inner button">Edit</div></a>
+                          <a  *ngIf="((isRoleIn$ | async) == 'Admin')"  style="cursor: pointer;" (click)="onDeleteMovie()"><div class="inner button"> Delete</div></a>
                         </div>
                     </div>
                 </div>

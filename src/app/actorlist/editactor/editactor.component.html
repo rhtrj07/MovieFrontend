@@ -1,14 +1,54 @@
-<div class="container-fluid" style="margin-left: 400px; margin-top: 50px;">
+<div class="container-fluid" style="margin-left: 40px; margin-top: 50px;">
     <form [formGroup]="actorForm" (ngSubmit)="onSubmit()">
          
-          <h2  >Edit Profile</h2>
+          <h2 *ngIf = "editMode" >Edit Profile</h2>
+          <h2 *ngIf ="editMode===false" >Add New Movie</h2>
           <div class="form-group-1" style="max-width: 700px;">
 
-            <div *ngIf="actorForm.get('aname').touched && actorForm.get('aname').invalid" class="alert alert-danger"> 
-              <div class=" text-danger" *ngIf="actorForm.get('aname').errors">
-                Name is required.
+            <div *ngIf="actorForm.get('username').touched && actorForm.get('username').invalid" class="alert alert-danger"> 
+              <div class=" text-danger" *ngIf="actorForm.get('username').errors">
+                Username is required.
               </div>
               </div>
+            <input *ngIf ="editMode===false"
+              type="text"
+              id="username"
+              formControlName="username"
+              placeholder="Username"
+              class="form-control"/>
+
+              <div *ngIf="actorForm.get('email').touched && actorForm.get('email').invalid" class="alert alert-danger"> 
+                <div class=" text-danger" *ngIf="actorForm.get('email').errors.required">
+                  Email is required.
+                </div>
+                <div class=" text-danger" *ngIf="actorForm.get('email').errors.pattern">
+                  Email Format is wrong
+                </div>
+                </div>
+              <input *ngIf ="editMode===false"
+              type="text"
+              id="email"
+              formControlName="email"
+              placeholder="Email"
+              class="form-control"/>
+
+              <div *ngIf="actorForm.get('password').touched && actorForm.get('password').invalid" class="alert alert-danger"> 
+                <div class=" text-danger" *ngIf="actorForm.get('password').errors">
+                  Password is required.
+                </div>
+                </div>
+              <input *ngIf ="editMode===false"
+              type="text"
+              id="password"
+              formControlName="password"
+              placeholder="Password"
+              class="form-control"/>
+
+              <div *ngIf="actorForm.get('aname').touched && actorForm.get('aname').invalid" class="alert alert-danger"> 
+                <div class=" text-danger" *ngIf="actorForm.get('aname').errors">
+                  Name is required.
+                </div>
+                </div>
             <input
               type="text"
               id="aname"
@@ -23,7 +63,7 @@
                 </div>
                 </div>
             <input
-              type="text"
+              type="number"
               id="age"
               formControlName="age"
               placeholder="Age"
@@ -55,10 +95,10 @@
 
                 <div *ngIf="actorForm.get('phone').touched && actorForm.get('phone').invalid" class="alert alert-danger"> 
                   <div class=" text-danger" *ngIf="actorForm.get('phone').errors.required">
-                    Phone no is required.
+                    Phone No is required.
                   </div>
                   <div class=" text-danger" *ngIf="actorForm.get('phone').errors.pattern">
-                    Phone no must be 10 numbers.
+                    Phone no should be 10 numbers.
                   </div>
                   </div>
               <input
@@ -75,7 +115,7 @@
           <div class="form-submit" style="margin-top: 50px;">
             <button
             type="submit"
-            class="btn btn-success">Save</button>
+            class="btn btn-success" >Save</button>
             <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
           </div>
       </form>

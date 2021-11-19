@@ -9,10 +9,12 @@
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto mr-md-3">
         <li class="nav-item">
-          <a style="cursor: pointer;" class="nav-link " (click)="onHome()">Home</a></li>
+        
+          <a style="cursor: pointer;" *ngIf="((isRoleIn$ | async) == 'Actor') "  class="nav-link " (click)="onProfile()">Profile</a></li>
+          <li class="nav-item">
+            <a style="cursor: pointer;" *ngIf="((isRoleIn$ | async) == 'Admin')"  class="nav-link " (click)="onActors()">Actors</a></li>
           <li class="nav-item">
             <a style="cursor: pointer;" class="nav-link " (click)="onMovie()">Movie</a></li>
-        <!-- <li class="nav-item"><a href="#" class="nav-link">Shop</a></li> -->
         <li class="nav-item">
         <a style="cursor: pointer;" *ngIf="isLoggedIn$ | async " class="nav-link " (click)="onLogout()">Logout</a></li>
         <li class="nav-item">

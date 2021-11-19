@@ -12,21 +12,26 @@ import { ActorComponent } from './actor/actor.component';
 import { ProfileComponent } from './actor/profile/profile.component';
 import { EditComponent } from './actor/edit/edit.component';
 import { MovieComponent } from './actor/movie/movie.component';
+import { ActorlistComponent } from './actorlist/actorlist.component';
+import { ListComponent } from './actorlist/list/list.component';
+import { StartactorComponent } from './actorlist/startactor/startactor.component';
+import { EditactorComponent } from './actorlist/editactor/editactor.component';
+import { DetailsComponent } from './actorlist/details/details.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'/user/login',pathMatch:'full'},
+  {path:'',redirectTo:'/movie',pathMatch:'full'},
   {
     path: 'user', component: UserComponent,
     children: [
       { path: 'login', component: LoginComponent }
     ]
   },
-  {path:'home',component:HomeComponent
-  ,canActivate:[AuthGuard]
-},
+//   {path:'home',component:HomeComponent
+//   ,canActivate:[AuthGuard]
+// },
   {
     path: 'movie', component: MoviesComponent,
-    // canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       { path: '', component: MovieStartComponent },
       { path: 'new', component: MovieEditComponent },
@@ -42,13 +47,28 @@ const routes: Routes = [
   },
   {
     path: 'actor', component: ActorComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: ProfileComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'edit',component: EditComponent },
       { path: 'movie',component: MovieComponent },
-      
+    ]
+  },
+  {
+    path: 'actorlist', component: ActorlistComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: StartactorComponent },
+      { path: 'new', component: EditactorComponent },
+      {
+        path: ':id',
+        component: DetailsComponent
+      },
+      {
+        path: ':id/edit',
+        component: EditactorComponent
+      }
     ]
   },
 ];

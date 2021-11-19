@@ -1,0 +1,56 @@
+<div class="padding">
+     
+    <div class="card ">
+        <div class="row ">
+            <div class="col-sm-4 bg-c-lite-green user-profile">
+                <div class="card-block text-center text-white">
+                    <div class="m-b-25"> <img [src]='actor.photo' class="img-radius" alt="User-Profile-Image"
+                        style="width: 100px; height: 100px;"> </div>
+                    <h6 class="f-w-600">{{actor.aname}}</h6>
+                    <p>Actor</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="card-block">
+                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Email</p>
+                            <h6 class="text-muted f-w-400">{{actor.email}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Phone</p>
+                            <h6 class="text-muted f-w-400">{{actor.phone}}</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Username</p>
+                            <h6 class="text-muted f-w-400">{{actor.username}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Age</p>
+                            <h6 class="text-muted f-w-400">{{actor.age}}</h6>
+                        </div>
+                    </div>
+                    <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Experience</p>
+                            <h6 class="text-muted f-w-400">{{actor.experience}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Gender</p>
+                            <h6 class="text-muted f-w-400">{{actor.gender}}</h6>
+                        </div>
+                    </div>
+                <div >
+                    <a   style="cursor: pointer;" (click)="onEditActor()"><button style="margin-left: 50px;" class="btn-outline-primary">Edit</button></a>
+                    <a  style="cursor: pointer;" (click)="onDeleteActor()"><button style="margin-left: 50px;" class="btn-outline-primary">Delete</button></a>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

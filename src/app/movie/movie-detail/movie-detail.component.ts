@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { UserService } from 'src/app/shared/user.service';
 
 import { Movie } from '../movie.model';
 import { MovieService } from '../movie.service';
@@ -13,6 +14,8 @@ import { MovieService } from '../movie.service';
 export class MovieDetailComponent implements OnInit {
   [x: string]: any;
 
+  isRoleIn$: Observable<string>;
+
   actors: any;
   movies:Movie;
   id: number;
@@ -21,6 +24,7 @@ export class MovieDetailComponent implements OnInit {
 
   constructor(private movieService: MovieService,
               private route: ActivatedRoute,
+              private service : UserService,
               private router: Router,
               private activeRoute: ActivatedRoute) {
                 this.activeRoute.paramMap.subscribe(params => {
@@ -32,18 +36,7 @@ export class MovieDetailComponent implements OnInit {
 
   ngOnInit() {
 
-    
-      // do something with the query params
-    
-
-  //   this.sub=this._Activatedroute.paramMap.subscribe(params => { 
-  //     console.log(params);
-  //      this.id = params.get('id'); 
-  //      this.movie=this.movieService.getMovie(this.id);
-  //      this.movie=this.movie.find(p => p.id==this.id);    
-  //  });
-
-    
+    this.isRoleIn$ = this.service.isRoleIn;
   
     this.route.params.subscribe(
         (params: Params) => {

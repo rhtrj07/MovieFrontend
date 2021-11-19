@@ -40,21 +40,15 @@ export class MovieService {
   }
 
   getMovieEdit(id: number):Observable<Movie> {
-   return this.http.get<Movie>('https://localhost:44325/api/movies/'+id.toString())
+   return this.http.get<Movie>('https://localhost:44325/api/movies/Edit/'+id.toString())
   }
 
   getMovieCastEdit(id: number) {
-     this.http.get<Actor[]>('https://localhost:44325/api/link/cast/'+id.toString()).subscribe(
-      res => {
-        this.casts = res;
-        console.log(res);
-      },
-      err => {
-        console.log(err);
-      },
-    );
+    return this.http.get<Actor[]>('https://localhost:44325/api/link/castEdit/'+id.toString())
+  }
 
-    return this.casts;
+  getActorsEdit(){
+    return this.http.get<Actor[]>('https://localhost:44325/api/actors/Edit/');
   }
 
   getActors(){

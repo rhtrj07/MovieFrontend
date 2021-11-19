@@ -25,6 +25,12 @@ import { ProfileComponent } from './actor/profile/profile.component';
 import { MovieComponent } from './actor/movie/movie.component';
 import { EditComponent } from './actor/edit/edit.component';
 import { SidebarComponent } from './actor/sidebar/sidebar.component';
+import { ActorlistComponent } from './actorlist/actorlist.component';
+import { ListComponent } from './actorlist/list/list.component';
+import { DetailsComponent } from './actorlist/details/details.component';
+import { StartactorComponent } from './actorlist/startactor/startactor.component';
+import { EditactorComponent } from './actorlist/editactor/editactor.component';
+import { ActorListService } from './actorlist/actorlist.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +48,12 @@ import { SidebarComponent } from './actor/sidebar/sidebar.component';
     ProfileComponent,
     MovieComponent,
     EditComponent,
-    SidebarComponent
+    SidebarComponent,
+    ActorlistComponent,
+    ListComponent,
+    DetailsComponent,
+    StartactorComponent,
+    EditactorComponent
 
   ],
   imports: [
@@ -59,7 +70,7 @@ import { SidebarComponent } from './actor/sidebar/sidebar.component';
   ],
 
  
-  providers: [DatePipe, UserService, MovieService,{
+  providers: [DatePipe, UserService, MovieService,ActorListService,{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true

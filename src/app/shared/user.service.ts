@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -11,18 +11,49 @@ import { Movie } from '../movie/movie.model';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements OnInit{
 
-  private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  currauth : boolean
+  currrole : string
+  private loggedIn: BehaviorSubject<boolean> =new BehaviorSubject<boolean>( false );
+  private RoleIn : BehaviorSubject<string> = new BehaviorSubject<string>( "" );
+
+  ngOnInit(){
+
+     this.http.get<any>('https://localhost:44325/api/Authenticate/user').subscribe(
+      res => { this.currauth = res.isAuthenticated 
+               this.currrole = res.role
+              this.loggedIn.next(this.currauth);
+              this.RoleIn.next(this.currrole);
+
+          // this.loggedIn = new BehaviorSubject<boolean>( this.currauth );
+          // this.RoleIn = new BehaviorSubject<string>( this.currrole );
+      }
+    )
+  }
+
+  // private loggedIn: BehaviorSubject<boolean> =new BehaviorSubject<boolean>( this.currauth );
+  // private RoleIn : BehaviorSubject<string> = new BehaviorSubject<string>( this.currrole );
+
+
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
+  }
+  get isRoleIn() {
+    return this.RoleIn.asObservable();
   }
 
 
 
   constructor(private router: Router,private fb: FormBuilder, private http: HttpClient , private toastr: ToastrService ) { }
   readonly BaseURI = 'http://localhost:44325/api';
+
+
+  Start()
+  {
+    this.ngOnInit();
+  }
 
   formModel = this.fb.group({
     UserName: ['', Validators.required],
@@ -60,11 +91,10 @@ export class UserService {
   login(formData) {
     return this.http.post<any>('https://localhost:44325/api/Authenticate/login', formData).subscribe(
       (res: any) => {
-        localStorage.setItem("role",res.role);
-        localStorage.setItem('username',res.username);
         localStorage.setItem('token', res.token);
         this.loggedIn.next(true);
-        this.router.navigateByUrl('/home');
+        this.RoleIn.next(res.userRoles);
+        this.router.navigateByUrl('/movie');
       },
       err => {
         if (err.status == 401)
@@ -90,14 +120,15 @@ export class UserService {
 
   Logout() {
     this.loggedIn.next(false);
+    this.RoleIn.next("");
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
 
   }
 
   getUserProfile(){
-    var username = localStorage.getItem("username");
-    return this.http.get<Actor>('https://localhost:44325/api/Actors/user/'+username.toString());
+    //var username = localStorage.getItem("username");
+    return this.http.get<Actor>('https://localhost:44325/api/Actors/curruser');
   }
 
   updateActorInfo(id: number, actor: Actor){
@@ -112,7 +143,7 @@ export class UserService {
 
   getUserMovie()
   {
-    var username = localStorage.getItem("username");
-    return this.http.get<Movie[]>('https://localhost:44325/api/link/moviesbyuser/'+username.toString());
+    //var username = localStorage.getItem("username");
+    return this.http.get<Movie[]>('https://localhost:44325/api/link/moviesbyuser');
   }
 }

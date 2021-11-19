@@ -12,22 +12,40 @@ export class HeaderComponent implements OnInit {
   // private authStatusListener = new Subject<boolean>();
 
   isLoggedIn$: Observable<boolean>;
-  // isAuthenticated = false;
+
+  isRoleIn$: Observable<string>;
+
+  isAuthenticated = false;
+  
   userDetails;
   constructor(private router: Router, private service: UserService ) { }
 
   
   ngOnInit() {
+    this.service.Start();
+
     this.isLoggedIn$ = this.service.isLoggedIn;
+    this.isRoleIn$ = this.service.isRoleIn;
 
   }
 
   onSignin(){
     this.router.navigate(['/user/login']);
+    this.ngOnInit()
+  }
+
+  onProfile(){
+    this.router.navigate(['/actor']);
+  }
+
+  onActors(){
+    this.router.navigate(['/actorlist']);
+
   }
   
   onLogout() {
     this.service.Logout();
+    this.ngOnInit()
   }
 
   onHome(){

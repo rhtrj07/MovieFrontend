@@ -1,0 +1,58 @@
+
+
+<div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewActor()">New Actor</button>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-12">  
+      <div *ngFor="let actor of actors; let i = index">
+  
+        <!-- <div class="card" style="background-image: url('{{actor.photo}}')" >
+          
+          
+          <div class="card__inner">
+  
+            
+            <main class="card__body">
+              
+              <div class="card__info">
+                <h1 class="card__title">{{actor.aname}}</h1>
+            
+                <p class="card__slug">Actor</p>
+                <a
+                  style="cursor: pointer;"
+                  [routerLink]="[movie.id]"
+                  routerLinkActive="active" >
+                  <button class="card__btn">See More</button>
+                </a>
+                
+              </div>
+            </main>
+          </div>
+        </div> -->
+
+
+
+        <div class="container mt-5 d-flex justify-content-center"  > 
+          <div class="card p-3" style="background-color: rgb(207, 243, 243);">
+              <div class="d-flex align-items-center" >
+                  <div class="image"> <img [src]="actor.photo" class="rounded" width="155"> </div>
+                  <div class="ml-3 w-100">
+                      <h4 class="mb-0 mt-0">{{actor.aname}}</h4> <span>Actor</span>
+                      <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                          <div class="d-flex flex-column"> <span class="articles">Age</span> <span class="number1">{{actor.age}}</span> </div>
+                          <div class="d-flex flex-column"> <span class="followers">Experience</span> <span class="number2">{{actor.experience}} Years</span> </div>
+                          <div class="d-flex flex-column"> <span class="rating">Gender</span> <span class="number3">{{actor.gender}}</span> </div>
+                      </div>
+                      <div class="button mt-2 d-flex flex-row align-items-center">  <a
+                        style="cursor: pointer;"
+                        [routerLink]="[actor.id]"
+                        routerLinkActive="active" > <button class="btn btn-sm btn-outline-primary w-100">See Details</button> </a> </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>

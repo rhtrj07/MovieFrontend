@@ -20,6 +20,11 @@
                       formControlName="mname"
                       placeholder="mname"
                       class="form-control" hidden/>
+                      <div *ngIf="movieForm.get('mname').touched && movieForm.get('mname').invalid" class="alert alert-danger"> 
+                      <div class=" text-danger" *ngIf="movieForm.get('mname').errors">
+                        Name is required.
+                      </div>
+                      </div>
                   <input
                     type="text"
                     id="mname"
@@ -27,30 +32,55 @@
                     formControlName="mname"
                     placeholder="Name"
                     class="form-control"/>
+                    <div *ngIf="movieForm.get('description').touched && movieForm.get('description').invalid" class="alert alert-danger"> 
+                   <div class=" text-danger" *ngIf="movieForm.get('description').errors">
+                        Description is required.
+                      </div>
+                      </div>
                   <textarea rows="4" cols="50"
                     type="text"
                     id="description"
                     formControlName="description"
                     placeholder="Description"
                     class="form-control"></textarea>
+                    <div *ngIf="movieForm.get('genre').touched && movieForm.get('genre').invalid" class="alert alert-danger"> 
+                    <div class=" text-danger" *ngIf="movieForm.get('genre').errors">
+                      Genre is required.
+                    </div>
+                    </div>
                   <input
                       type="text"
                       id="genre"
                       formControlName="genre"
                       placeholder="Genre"
                       class="form-control"/>
+                      <div *ngIf="movieForm.get('duration').touched && movieForm.get('duration').invalid" class="alert alert-danger"> 
+                      <div class=" text-danger" *ngIf="movieForm.get('duration').errors">
+                        Duration is required.
+                      </div>
+                      </div>
                     <input
                       type="number"
                       id="duration"
                       formControlName="duration"
                       placeholder="Duration"
                       class="form-control"/>
+                      <div *ngIf="movieForm.get('rating').touched && movieForm.get('rating').invalid" class="alert alert-danger"> 
+                      <div class=" text-danger" *ngIf="movieForm.get('rating').errors">
+                        Rating is required.
+                      </div>
+                      </div>
                     <input
                       type="number"
                       id="rating"
                       formControlName="rating"
                       placeholder="Rating"
                       class="form-control"/>
+                      <div *ngIf="movieForm.get('releasedate').touched && movieForm.get('releasedate').invalid" class="alert alert-danger"> 
+                      <div class=" text-danger" *ngIf="movieForm.get('releasedate').errors">
+                        Release Date is required.
+                      </div>
+                      </div>
                     <input
                       type="date"
                       id="releasedate"
@@ -96,7 +126,7 @@
                 <div class="form-submit" style="margin-top: 50px;">
                   <button
                   type="submit"
-                  class="btn btn-success">Save</button>
+                  class="btn btn-success"  [disabled]="!movieForm.valid">Save</button>
                   <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
                 </div>
             </form>

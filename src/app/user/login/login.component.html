@@ -1,22 +1,3 @@
-<!-- <form #form='ngForm' class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
-  <div class="form-group">
-    <label>Username</label>
-    <input class="form-control" #Username="ngModel" name="Username" [(ngModel)]="formModel.Username" required>
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" required>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-8 offset-md-2">
-      <button type="submit" class="btn btn-lg btn-block" [disabled]="form.invalid">Login</button>
-      <img class="img-responsive" src="assets/images/myimage.jpg">
-
-    </div>
-  </div>
-</form> -->
-
-
 
 <div class="limiter">
   <div class="container-login100">
@@ -39,21 +20,6 @@
           <input class="input100" type="password"  #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" required placeholder="Enter password">
           <span class="focus-input100"></span>
         </div>
-
-        <!-- <div class="flex-sb-m w-full p-b-30">
-          <div class="contact100-form-checkbox">
-            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-            <label class="label-checkbox100" for="ckb1">
-              Remember me
-            </label>
-          </div>
-
-          <div>
-            <a href="#" class="txt1">
-              Forgot Password?
-            </a>
-          </div>
-        </div> -->
 
         <div class="container-login100-form-btn">
           <button type="submit" class="login100-form-btn" [disabled]="form.invalid">Login</button>

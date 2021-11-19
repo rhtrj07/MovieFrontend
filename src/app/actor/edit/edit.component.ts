@@ -14,7 +14,7 @@ export class EditComponent implements OnInit {
   actorForm: FormGroup;
   actor: Actor;
   files : File;
-  filestring : string
+  filestring : string;
   
   constructor(private service: UserService ,private router: Router,private route: ActivatedRoute,) { }
   
@@ -51,7 +51,7 @@ onSubmit() {
   this.filestring = "data:image/jpeg;base64,"+this.filestring;
   this.actorForm.value.photo = this.filestring;
 
-
+  
     if(this.actorForm.value.photo.includes("undefined"))
     {
       this.actorForm.value.photo = this.actor.photo;
@@ -81,14 +81,14 @@ onCancel() {
 
 
     this.actorForm = new FormGroup ({
-      photo: new FormControl(photo, Validators.required),
+      photo: new FormControl(photo),
       aname: new FormControl(aname, Validators.required),
       username: new FormControl(username, Validators.required),
       age: new FormControl(age, Validators.required),
       experience: new FormControl(experience, Validators.required),
       email : new FormControl(email, Validators.required),
       gender : new FormControl(gender, Validators.required),
-      phone : new FormControl(phone, Validators.required),
+      phone : new FormControl(phone, [ Validators.required , Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       id : new FormControl(id, Validators.required),
     });
   }

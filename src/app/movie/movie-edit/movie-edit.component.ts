@@ -8,6 +8,9 @@ import { Movie } from '../movie.model';
 import { Actor } from '../actor.model';
 import { ActorMovieLink } from '../actormovielink.model';
 import { JsonpClientBackend } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/shared/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-movie-edit',
@@ -24,12 +27,16 @@ export class MovieEditComponent implements OnInit {
   actors : any
   NextId : any;
   cast : Actor[];
+  isRoleIn$: Observable<string>;
+
 
 
   constructor(private movieService: MovieService,
     private route: ActivatedRoute,
     private datePipe: DatePipe,
+    private service : UserService,
     private router: Router,
+    private toastr :ToastrService,
     private activeRoute: ActivatedRoute) {
       this.activeRoute.paramMap.subscribe(params => {
         this.ngOnInit();
@@ -37,41 +44,71 @@ export class MovieEditComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.service.Start();
+
+    this.isRoleIn$ = this.service.isRoleIn;
+
+    console.log(this.isRoleIn$)
+
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.editMode = params['id'] != null; 
+      this.service.Start();
 
     });
 
     if(this.editMode)
       {
-        this.movieService.getMovieCast(this.id).subscribe(
+        this.movieService.getMovieCastEdit(this.id).subscribe(
           res => {
             this.cast = res;
             console.log(res);
           },
+          err => {
+            if (err.status == 403){
+            this.toastr.error('You are not Authenticated.');
+            this.router.navigate(['/movie']);}
+            else
+              console.log(err);
+          }
          
         );
     
-        this.movieService.getMovie(this.id).subscribe(
-          res => {
-            this.movie = res;
-            console.log(res);
-            this.initForm(this.movie);
 
-          },
-          err => {
-            console.log(err);
-          },
-        );
-
-        this.movieService.getActors().subscribe(
+        this.movieService.getActorsEdit().subscribe(
           res => {
             this.actors = res;
             console.log(res);
             
+          },
+          err => {
+            if (err.status == 403)
+            {
+              this.router.navigate(['/movie']);}
+            else
+              console.log(err);
           }
         );
+
+
+        this.movieService.getMovieEdit(this.id).subscribe(
+          res => {
+            this.movie = res;
+            console.log(res);
+            this.initForm(this.movie);
+            
+          },
+          err => {
+            if (err.status == 403)
+            {
+              this.router.navigate(['/movie']);}
+            else
+              console.log(err);
+          }
+        );
+
+       
       }
 
       else{
@@ -88,11 +125,18 @@ export class MovieEditComponent implements OnInit {
           
         }
 
-        this.movieService.getActors().subscribe(
+        this.movieService.getActorsEdit().subscribe(
           res => {
             this.actors = res;
             console.log(res);
             this.initForm(this.movie);
+          },
+          err => {
+            if (err.status == 403)
+            {
+              this.router.navigate(['/movie']);}
+            else
+              console.log(err);
           }
         );
       }
@@ -142,8 +186,6 @@ onDeleteCast(index: number) {
 
   onSubmit() {
 
-    
-    this.movieForm.value.cas
     this.filestring = "data:image/jpeg;base64,"+this.filestring;
     this.movieForm.value.photo = this.filestring;
 
@@ -210,7 +252,7 @@ onDeleteCast(index: number) {
     }
 
     this.movieForm = new FormGroup ({
-      photo: new FormControl(photo, Validators.required),
+      photo: new FormControl(photo),
       mname: new FormControl(mname, Validators.required),
       description: new FormControl(description, Validators.required),
       duration : new FormControl(duration, Validators.required),
